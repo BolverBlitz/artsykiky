@@ -5,8 +5,8 @@ export default function Home() {
     <>
     <ul>
       <li>
-        <Link href="LABYRINTH">
-          <a>Labyrinth</a>
+        <Link href="labyrinth">
+          <a>LABYRINTH</a>
         </Link>
       </li>
       <li>
