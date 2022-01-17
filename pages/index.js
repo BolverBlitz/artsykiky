@@ -3,10 +3,18 @@ import  styles  from "../styles/index.module.scss"
 import  Head from 'next/head'
 import  Image from 'next/image'
 import Logo from '../public/logoartsykiky.png'
+import { useEffect } from "react"
 {/*import 'bootstrap/dist/css/bootstrap.css'*/}
 
 
 export default function Home() {
+  
+  //Print some links to console
+  useEffect(()=>{
+    console.log("Open github: https://github.com/artsykiky/artsykiky")
+    console.log("Develop in gitpod: https://gitpod.io/#https://github.com/artsykiky/artsykiky")
+  },[])
+
   return <div className={styles.wrapper}> 
     <Head>
         <title>Artsykiky</title>
