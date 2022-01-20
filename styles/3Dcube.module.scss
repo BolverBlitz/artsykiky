@@ -122,13 +122,12 @@
     circle at top,
     lightblue, 50%, #000
   );
-  transform: translate( 0em, -6em) translateZ(-1em);
-  animation: 
-    ballBounce 2s infinite ease-out,
+  transform: translate( 0em, -6.4em) translateZ(-1em);
+  animation: ballBounce 2s infinite ease-out,
 }
 
 @keyframes ballBounce {
-  0%, 100% {bottom: 0.5em;}
-  50% {bottom: 3em; animation-timing-function: ease-in;}
+  0%, 100% {bottom: 0%;}
+  50% {bottom: 30%; animation-timing-function: ease-in;}
 }
 
