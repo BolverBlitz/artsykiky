@@ -15,9 +15,9 @@ function DreiDcube () {
           <div className={styles.top}/>
           <div className={styles.bottom}/>
           <div className={styles.floor}/>
-          <div className={styles.ballshadow}/>
+          {/*<div className={styles.ballshadow}/>*/}
       </div>
-      <div className={styles.ball}></div>
+      {/*<div className={styles.ball}></div>*/}
     
   
     </div>
