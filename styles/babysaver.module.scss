@@ -1,0 +1,365 @@
+.wrapper {
+
+$zindex: 1;
+$zindex-footer: 10;
+$frame-radius: 20px;
+$intro-zindex: 20;
+$intro-opa: 0.8;
+$state-zindex: 30;
+$gameover-zindex: 40;
+$game-speed: 40;
+
+$fh: 40px;
+
+$babies: 100;
+$babyh: 30px;
+$zindex-babies: 15;
+
+//Farben
+
+$white: rgb(255, 255, 255);
+$orange: rgb(250, 179, 43);
+$green: rgb(55, 200, 123);
+$turqouise: rgb(18, 121, 142);
+$yellow: rgb(250, 217, 33);
+$red: rgb(208, 61, 60);
+
+@function pv() {
+    $position: random()*95 + '%';
+
+    @return #{$position};
+}
+
+@mixin size($height, $width) {
+    height: $height;
+    width: $width;
+    
+}
+
+@mixin square($size) {
+    @include size($size, $size);
+}
+
+@keyframes babies {
+    0% {
+        box-shadow: none;
+        padding: 0;
+        pointer-events: all;
+        top: -$babyh;
+    }
+
+    95% {
+        @include size($babyh, $babyh*.6);
+        box-shadow: none;
+        background-color: $white;
+        border: 1px solid black;
+        border-radius: 100% 100% 100% 100% / 100% 100% 70% 70%;
+        padding: 0;
+        pointer-events: all;
+    }
+
+    100% {
+        @include size($babyh/2, $babyh/2 );
+        box-shadow: 0 0 3px 10px darken($white, 5%);
+        background-color: #ffffcc;
+        border-radius: 100%;
+        border-color: rgba(black, 0.1);
+        padding: 5px;
+        pointer-events: none;
+        top: calc(100vh - #{$fh});
+    }
+}
+
+@keyframes gameover {
+    to {
+        perspective: 1000;
+        transform: rotateY(0deg);
+        transition: all 600ms;
+    }
+}
+
+* {
+    box-sizing: border-box;
+
+    &:before, &:after {
+        box-sizing: border-box;
+    }
+}
+
+.body {
+    @include size(100vh, 100vw);
+    background-color: $white;
+    display: flex;
+    overflow: hidden;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.check {
+    @include square(0);
+    appearance: none;
+    background-color: transparent;
+    border: 0;
+    left: 0;
+    outline: 0;
+    position: absolute;
+    top: 0;
+
+    &:checked {
+        counter-increment: game;
+    }
+}
+
+.scene {
+    @include size(100vh, 100vw);
+    align-items: center;
+    display: inherit;
+    justify-content: center;
+}
+
+.intro,
+.gameover {
+    background-color: darken(blue, 20%);
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    padding: ($frame-radius / 2) $frame-radius;
+    perspective: 1000;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition: all 600ms;
+    z-index: $intro-zindex;
+}
+
+.intro {
+    color: lighten(blue, 10%);
+
+    h1, h2 {
+        color: $white;
+        display: flex;
+        font-family: 'Sedgwick Ave Display' cursive;
+        justify-content: center;
+        margin-bottom: 10px;
+        text-shadow: 0 .4vw 5px black;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .anweisung {
+        display: flex;
+        flex-direction: column;
+        margin: 5vh auto 0;
+        max-width: 50vw;
+
+        p {
+            margin-bottom: 10px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.startinput {
+    display: none;
+
+    &:checked {
+
+        &~.intro {
+            opacity: 0;
+            visibility: hidden;
+            transform: rotateY(90deg);
+            transition: all 600ms;
+        }
+
+        &~.gameover {
+            animation-play-state: running;
+        }
+
+        &+.state {
+            display: none;
+
+            .start {
+                background-color: #2196F3;
+
+                &::before {
+                    transform: translateX(26px);
+                }
+            }
+        }
+
+        &~.baby {
+            animation-play-state: running;
+        }
+    }
+}
+
+.state {
+    bottom: 3px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    height: 34px;
+    transform: translateX(-50%);
+    width: 60px;
+    z-index: $state-zindex;
+
+    .start {
+        background-color: red;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: .4s;
+
+        &:before {
+            background-color: red;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+        }
+
+        &.round {
+            border-radius: 34px;
+
+            &:before {
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+.frame {
+    @include square(100%);
+    background-color: darken(blue, 15%);
+    counter-reset: none;
+    height: 100vh;
+    overflow: hidden;
+    perspective: 1000px;
+    position: relative;
+    transform-style: preserve-3d;
+    width: 100vw;
+}
+
+.babies {
+    display: none;
+    position: relative;
+
+    .kopf, .koerper {
+        background-color: $white;
+        border: 1px solid black;
+    }
+}
+
+.baby {
+    @include size($babyh, $babyh*.6);
+    background-color: $white;
+    border: 1px solid black;
+    border-radius: 100% 100% 100% 100% / 100% 100% 70% 70%;
+    box-shadow: none;
+    padding: 0;
+    position: absolute;
+    top: -$babyh;
+    z-index: $zindex-babies;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    @for $i from 1 through $babies {
+        $speed: random(3)*($game-speed / 4) + 's';
+        $random: random( )*5 + 's';
+
+        &__#{$i} {
+
+            &:checked {
+
+                &~.baby__#{$i} {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.01);
+                    transition: all 0.1s linear;
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    align-items: center;
+    background-color: darken(blue, 25%);
+    bottom: 0;
+    display: flex;
+    flex: 1 0 auto;
+    height: $babyh;
+    left: 0;
+    padding: 0 $frame-radius / 2;
+    position: absolute;
+    right: 0;
+    z-index: $zindex-footer;
+}
+
+.punkte {
+    color: $white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-shadow: 0 .4vw black;
+
+    span {
+
+        &:after {
+            content: counter(game);
+        }
+    }
+}
+
+.gameover {
+    align-items: center;
+    animation: gameover 1s linear unquote($game-speed + 's') forwards;
+    animation-play-state: paused;
+    justify-content: center;
+    transform: rotateY(90deg);
+    z-index: $gameover-zindex;
+
+    h1 {
+        color: $white;
+        font-family: 'Sedgwick Ave Display', cursive;
+        font-size: 3rem;
+        margin-bottom: 25px;
+        text-shadow: 0 .4vw black;
+    }
+
+    .text {
+        color: $white;
+        font-family: 'Righteous', cursive;
+        font-weight: normal;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    .punkte {
+        color: blue;
+        margin-bottom: 20px;
+    }
+}
+}
