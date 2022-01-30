@@ -6,7 +6,6 @@ import Logo from '../public/logoartsykiky.png'
 import { useEffect } from "react"
 {/*import 'bootstrap/dist/css/bootstrap.css'*/}
 
-
 export default function Home() {
   
   //Print some links to console
