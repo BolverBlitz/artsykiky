@@ -132,13 +132,13 @@
   border-radius: 50%;
   background: lightblue;
 
-  position: relative;
+  position: absolute;
 
   background-image: radial-gradient(
     circle at top,
     lightblue, 50%, #000
   );
-  transform: translateY(-1.3em) translateZ(-2em) translateX(-1.5em);
+  transform: translate( 0em, -6.4em) translateZ(-1em);
   animation: ballBounce 2s infinite ease-out,
 }
 
