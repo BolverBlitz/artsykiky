@@ -143,7 +143,7 @@
 }
 
 @keyframes ballBounce {
-  0%, 100% {bottom: -5%; -webkit-bottom: -0%; animation-timing-function: linear; -webkit-animation-timing-function: linear;}
-  50% {bottom: 30%; -webkit-bottom: 30%; animation-timing-function: linear; -webkit-animation-timing-function: linear;}
+  0%, 100% {bottom: -5%; animation-timing-function: linear; -webkit-animation-timing-function: linear;}
+  50% {bottom: 30%; animation-timing-function: linear; -webkit-animation-timing-function: linear;}
 }
 
