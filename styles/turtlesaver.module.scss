@@ -10,31 +10,22 @@
 
 @keyframes fallen {
     0% {
-        box-shadow: none;
-        padding: 0;
         pointer-events: all;
         top: -30px;
     }
 
     95% {
-        width: 18px;
-        height: 30px;
-        box-shadow: none;
-        background-color: white;
-        border: 1px solid black;
-        border-radius: 100% 100% 100% 100% / 100% 100% 70% 70%;
-        padding: 0;
+        background: #556B2F;
         pointer-events: all;
     }
 
     100% {
-        width: 15px;
-        height: 15px;
-        box-shadow: 0 0 3px 10px darken(white, 5%);
-        background-color: #ffffcc;
-        border-radius: 100%;
-        border-color: rgba(black, 0.1);
-        padding: 5px;
+        position: absolute;
+        width: 45px;
+        height: 20px;
+        background: red;
+        border: 1px solid #BDB76B;
+        border-radius: 100% 100% 0 0 / 170% 170% 0 0;
         pointer-events: none;
         top: calc(100vh - 40px);
     }
@@ -59,7 +50,7 @@
 .body {
     height: 100vh; 
     width: 100vw;
-    background-color: white;
+    background-color: darkcyan;
     display: flex;
     overflow: hidden;
     font-family: 'Source Sans Pro', sans-serif;
@@ -91,7 +82,7 @@
 
 .intro,
 .gameover {
-    background-color: darken(BlueViolet, 20%);
+    background-color: darken(#20B2AA, 20%);
     bottom: 0;
     display: flex;
     flex-direction: column;
@@ -191,7 +182,7 @@
     border: 1px solid white;
     color: white;
     font-weight: bold;
-    background-color: DarkCyan;
+    background-color: #556B2F;
 
     .start {
         cursor: pointer;
@@ -236,16 +227,41 @@
 }
 
 .baby {
-    width: 18px;
-    height: 30px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 100% 100% 100% 100% / 100% 100% 70% 70%;
-    box-shadow: none;
-    padding: 0;
     position: absolute;
+    width: 45px;
+    height: 20px;
+    background: #556B2F;
+    border: 1px solid #BDB76B;
+    border-radius: 100% 100% 0 0 / 170% 170% 0 0;
     top: -30px;
     z-index: 50;
+
+    &:after{
+        position: absolute;
+        content:'';
+        width: 10px;
+        height: 30px;
+        background: #556B2F;
+        left: 50%;
+        margin-left: -25px;
+        border: 1px solid #BDB76B;
+        border-radius: 100% 100% 250% 50% / 200% 200% 30% 30%;
+        top: -50%;
+    } 
+
+    &::before{
+        position: absolute;
+        content:'';
+        width: 20px;
+        height: 10px;
+        background: #556B2F;
+        left: 25%;
+        margin-left: -25px;
+        border: 1px solid #BDB76B;
+        border-radius: 100% 30% 50% 50% / 200% 200% 30% 30%;
+        top: -50%;
+        z-index: 20;
+    } 
 
     &:hover {
         cursor: pointer;
@@ -279,7 +295,7 @@
 
 .footer {
     align-items: center;
-    background-color: darken(BlueViolet, 20%);
+    background-color: darken(#20B2AA, 20%);
     bottom: 0;
     display: flex;
     flex: 1 0 auto;
@@ -295,6 +311,7 @@
     color: white;
     font-family: 'Sedgwick Ave Display', sans-serif;
     font-size: 1rem;
+    margin-left: 15px;
 
 
     span {
@@ -337,17 +354,17 @@
     }
 
     .punkte {
-        color: DarkCyan;
+        color: #BDB76B;
         margin-bottom: 20px;
         text-shadow: none;
     }
 
     a { 
-        color: darkcyan;
+        color: #BDB76B;
     }
 
     a:hover { 
-        color: CornflowerBlue;
+        color: #556B2F;
     }
 }
 }

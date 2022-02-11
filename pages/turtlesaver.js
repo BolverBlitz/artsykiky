@@ -1,4 +1,4 @@
-import styles from "../styles/babysaver.module.scss"
+import styles from "../styles/turtlesaver.module.scss"
 import Head from 'next/head'
 
 function babysaver() {
@@ -8,9 +8,10 @@ function babysaver() {
         babies.push(<label htmlFor={"baby" + bby} className={styles.baby + ' ' + styles["baby" + bby]}></label>)
     }
 
+
     var lennart = (<div className={styles.wrapper}>
         <Head>
-            <title>Save the babies</title>
+            <title>Save the turtles</title>
         </Head>
 
         <div className={styles.body + ' ' + styles.scene + ' ' + styles.babysaver}>
@@ -22,14 +23,14 @@ function babysaver() {
                 </label>
 
                 <div className={styles.intro}>
-                    <h1>Save the babies</h1>
+                    <h1>Save the turtles</h1>
 
                     <div className={styles.anweisung}>
-                        <p>You have to catch the babies</p>
+                        <p>You have to catch the turtles.</p>
                         <p>How you do that?</p>
-                        <p>You have to hurry up. Click on the babies to put them safely to bed.</p>
-                        <p>Each rescued baby gives you a point.</p>
-                        <p>You can save 100 babies. Try to catch them all.</p>
+                        <p>You have to hurry up. Click on the turtles to save them.</p>
+                        <p>Each rescued turtle gives you a point.</p>
+                        <p>You can save 100 turtles. Try to catch them all.</p>
                     </div>
                 </div>
 
@@ -57,7 +58,7 @@ function babysaver() {
 
                 <div className={styles.footer}>
                     <div className={styles.punkte}>
-                        You saved:&nbsp;<span></span>&nbsp;of 100 babies
+                        You saved:&nbsp;<span></span>&nbsp;of 100 turtles
                     </div>
                 </div>
 
