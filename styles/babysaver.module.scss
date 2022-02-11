@@ -2,8 +2,13 @@
 
     $babies: 100;
 
+    @function pv() {
+        $position: random()*95 + '%';
+    
+        @return #{$position};
+    }
 
-/*@keyframes babies {
+@keyframes fallen {
     0% {
         box-shadow: none;
         padding: 0;
@@ -33,20 +38,19 @@
         pointer-events: none;
         top: calc(100vh - 40px);
     }
-}*/
+}
 
-/*@keyframes gameover {
+@keyframes gameover {
     to {
         perspective: 1000;
         transform: rotateY(0deg);
         transition: all 600ms;
     }
-}*/
+}
 
 * {
     box-sizing: border-box;
 
-    +
     &:before, &:after {
         box-sizing: border-box;
     }
@@ -64,13 +68,13 @@
 .check {
     width: 30px;
     height: 30px;
-    /*appearance: none;*/
+    appearance: none;
     background-color: transparent;
     border: 0;
-    /*left: 0;*/
+    left: 0;
     outline: 0;
-    /*position: absolute;
-    top: 0;*/
+    position: absolute;
+    top: 0;
 
     &:checked {
         counter-increment: game;
@@ -163,7 +167,7 @@
             .start {
                 background-color: #2196F3;
 
-                &::before {
+                &:before {
                     transform: translateX(26px);
                 }
             }
@@ -228,6 +232,7 @@
         background-color: white;
         border: 1px solid black;
     }
+    
 }
 
 .baby {
@@ -240,27 +245,35 @@
     padding: 0;
     position: absolute;
     top: -30px;
-    z-index: 15;
+    z-index: 50;
 
     &:hover {
         cursor: pointer;
     }
 
     @for $i from 1 through $babies {
-        speed: random(3)*(40 / 4) + 's';
-        position: random( )*5 + 's';
+            $speed: random(3)*(40 / 4) + 's';
+            $random: random( )*5 + 's';
 
-        &__#{$i} {
+            &#{$i} {
+                animation: fallen #{$speed} linear #{$random} forwards;
+                animation-play-state: paused;
+                left: pv();
+            }
 
-            &:checked {
+            &#{$i} {
 
-                &~.baby__#{$i} {
-                    opacity: 0;
-                    transform: translate(-50%, -50%) scale(0.01);
-                    transition: all 0.1s linear;
+                &:checked {
+
+
+                    &~.baby#{$i} {
+                        opacity: 0;
+                        transform: translate(-50%, -50%) scale(0.01);
+                        transition: all 0.1s linear;
+                    }
                 }
             }
-        }
+        
     }
 }
 
