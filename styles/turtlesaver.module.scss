@@ -1,4 +1,5 @@
 .wrapper {
+    margin: -10px;
 
     $babies: 100;
 
@@ -109,6 +110,7 @@
         justify-content: center;
         margin-bottom: 10px;
         text-shadow: 0 .4vw 5px black;
+        text-align: center;
     }
 
     h1 {
