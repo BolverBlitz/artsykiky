@@ -7,7 +7,6 @@ import { useEffect } from "react"
 {/*import 'bootstrap/dist/css/bootstrap.css'*/ }
 
 export default function Home() {
-
   //Print some links to console
   useEffect(() => {
     console.log("Open github: https://github.com/artsykiky/artsykiky")
@@ -37,6 +36,3 @@ export default function Home() {
         {/*<p><Link href="/CSSBoxModel" passhref><a className={styles.unterseiten}>CSS Box Model</a></Link></p>*/}
       </div>
     </body>
-  </div>
-
-}
