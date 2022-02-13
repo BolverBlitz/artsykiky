@@ -1,4 +1,4 @@
-import  styles  from "../styles/boxmodel.module.scss"
+import  styles  from "../../styles/Projekte/boxmodel.module.scss"
 import  Head from 'next/head'
 
 

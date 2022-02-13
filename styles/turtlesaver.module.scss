@@ -1,72 +1,34 @@
 .wrapper {
+    margin: -10px;
 
-$zindex: 1;
-$zindex-footer: 10;
-$frame-radius: 20px;
-$intro-zindex: 20;
-$intro-opa: 0.8;
-$state-zindex: 30;
-$gameover-zindex: 40;
-$game-speed: 40;
+    $babies: 100;
 
-$fh: 40px;
-
-$babies: 100;
-$babyh: 30px;
-$zindex-babies: 15;
-
-//Farben
-
-$white: rgb(255, 255, 255);
-$orange: rgb(250, 179, 43);
-$green: rgb(55, 200, 123);
-$turqouise: rgb(18, 121, 142);
-$yellow: rgb(250, 217, 33);
-$red: rgb(208, 61, 60);
-
-@function pv() {
-    $position: random()*95 + '%';
-
-    @return #{$position};
-}
-
-@mixin size($height, $width) {
-    height: $height;
-    width: $width;
+    @function pv() {
+        $position: random()*95 + '%';
     
-}
+        @return #{$position};
+    }
 
-@mixin square($size) {
-    @include size($size, $size);
-}
-
-@keyframes babies {
+@keyframes fallen {
     0% {
-        box-shadow: none;
-        padding: 0;
         pointer-events: all;
-        top: -$babyh;
+        top: -30px;
     }
 
     95% {
-        @include size($babyh, $babyh*.6);
-        box-shadow: none;
-        background-color: $white;
-        border: 1px solid black;
-        border-radius: 100% 100% 100% 100% / 100% 100% 70% 70%;
-        padding: 0;
+        background: #556B2F;
         pointer-events: all;
     }
 
     100% {
-        @include size($babyh/2, $babyh/2 );
-        box-shadow: 0 0 3px 10px darken($white, 5%);
-        background-color: #ffffcc;
-        border-radius: 100%;
-        border-color: rgba(black, 0.1);
-        padding: 5px;
+        position: absolute;
+        width: 45px;
+        height: 20px;
+        background: red;
+        border: 1px solid #BDB76B;
+        border-radius: 100% 100% 0 0 / 170% 170% 0 0;
         pointer-events: none;
-        top: calc(100vh - #{$fh});
+        top: calc(100vh - 40px);
     }
 }
 
@@ -87,15 +49,17 @@ $red: rgb(208, 61, 60);
 }
 
 .body {
-    @include size(100vh, 100vw);
-    background-color: $white;
+    height: 100vh; 
+    width: 100vw;
+    background-color: darkcyan;
     display: flex;
     overflow: hidden;
     font-family: 'Source Sans Pro', sans-serif;
 }
 
 .check {
-    @include square(0);
+    width: 30px;
+    height: 30px;
     appearance: none;
     background-color: transparent;
     border: 0;
@@ -110,7 +74,8 @@ $red: rgb(208, 61, 60);
 }
 
 .scene {
-    @include size(100vh, 100vw);
+    height: 100vh; 
+    width: 100vw;
     align-items: center;
     display: inherit;
     justify-content: center;
@@ -118,12 +83,12 @@ $red: rgb(208, 61, 60);
 
 .intro,
 .gameover {
-    background-color: darken(blue, 20%);
+    background-color: darken(#20B2AA, 20%);
     bottom: 0;
     display: flex;
     flex-direction: column;
     left: 0;
-    padding: ($frame-radius / 2) $frame-radius;
+    padding: (20px / 2) 20px;
     perspective: 1000;
     position: absolute;
     right: 0;
@@ -131,19 +96,21 @@ $red: rgb(208, 61, 60);
     transform-style: preserve-3d;
     transform: rotateY(0deg);
     transition: all 600ms;
-    z-index: $intro-zindex;
+    z-index: 20;
 }
 
 .intro {
-    color: lighten(blue, 10%);
+    color: lighten(white, 10%);
 
     h1, h2 {
-        color: $white;
+        color: white;
         display: flex;
-        font-family: 'Sedgwick Ave Display' cursive;
+        font-family: 'Sedgwick Ave Display', sans-serif !important;
+        font-style: italic;
         justify-content: center;
         margin-bottom: 10px;
         text-shadow: 0 .4vw 5px black;
+        text-align: center;
     }
 
     h1 {
@@ -162,6 +129,7 @@ $red: rgb(208, 61, 60);
 
         p {
             margin-bottom: 10px;
+            text-align: center;
 
             &:last-child {
                 margin-bottom: 0;
@@ -192,7 +160,7 @@ $red: rgb(208, 61, 60);
             .start {
                 background-color: #2196F3;
 
-                &::before {
+                &:before {
                     transform: translateX(26px);
                 }
             }
@@ -205,49 +173,41 @@ $red: rgb(208, 61, 60);
 }
 
 .state {
-    bottom: 3px;
+    bottom: 100px;
     display: inline-block;
     position: absolute;
     left: 50%;
     height: 34px;
     transform: translateX(-50%);
     width: 60px;
-    z-index: $state-zindex;
+    z-index: 30;
+    border: 1px solid white;
+    color: white;
+    font-weight: bold;
+    background-color: #556B2F;
 
     .start {
-        background-color: red;
-        bottom: 0;
         cursor: pointer;
-        left: 0;
         position: absolute;
-        right: 0;
-        top: 0;
         transition: .4s;
+        padding-left: 10px;
+        padding-top: 5px;
 
         &:before {
-            background-color: red;
-            bottom: 4px;
             content: "";
             height: 26px;
-            left: 4px;
             position: absolute;
             transition: .4s;
             width: 26px;
         }
 
-        &.round {
-            border-radius: 34px;
-
-            &:before {
-                border-radius: 50%;
-            }
-        }
     }
 }
 
 .frame {
-    @include square(100%);
-    background-color: darken(blue, 15%);
+    width: 30px;
+    height: 30px;
+    background-color: darkcyan;
     counter-reset: none;
     height: 100vh;
     overflow: hidden;
@@ -262,63 +222,99 @@ $red: rgb(208, 61, 60);
     position: relative;
 
     .kopf, .koerper {
-        background-color: $white;
+        background-color: white;
         border: 1px solid black;
     }
+    
 }
 
 .baby {
-    @include size($babyh, $babyh*.6);
-    background-color: $white;
-    border: 1px solid black;
-    border-radius: 100% 100% 100% 100% / 100% 100% 70% 70%;
-    box-shadow: none;
-    padding: 0;
     position: absolute;
-    top: -$babyh;
-    z-index: $zindex-babies;
+    width: 45px;
+    height: 20px;
+    background: #556B2F;
+    border: 1px solid #BDB76B;
+    border-radius: 100% 100% 0 0 / 170% 170% 0 0;
+    top: -30px;
+    z-index: 50;
+
+    &:after{
+        position: absolute;
+        content:'';
+        width: 10px;
+        height: 30px;
+        background: #556B2F;
+        left: 50%;
+        margin-left: -25px;
+        border: 1px solid #BDB76B;
+        border-radius: 100% 100% 250% 50% / 200% 200% 30% 30%;
+        top: -50%;
+    } 
+
+    &::before{
+        position: absolute;
+        content:'';
+        width: 20px;
+        height: 10px;
+        background: #556B2F;
+        left: 25%;
+        margin-left: -25px;
+        border: 1px solid #BDB76B;
+        border-radius: 100% 30% 50% 50% / 200% 200% 30% 30%;
+        top: -50%;
+        z-index: 20;
+    } 
 
     &:hover {
         cursor: pointer;
     }
 
     @for $i from 1 through $babies {
-        $speed: random(3)*($game-speed / 4) + 's';
-        $random: random( )*5 + 's';
+            $speed: random(3)*(40 / 4) + 's';
+            $random: random( )*5 + 's';
 
-        &__#{$i} {
+            &#{$i} {
+                animation: fallen #{$speed} linear #{$random} forwards;
+                animation-play-state: paused;
+                left: pv();
+            }
 
-            &:checked {
+            &#{$i} {
 
-                &~.baby__#{$i} {
-                    opacity: 0;
-                    transform: translate(-50%, -50%) scale(0.01);
-                    transition: all 0.1s linear;
+                &:checked {
+
+
+                    &~.baby#{$i} {
+                        opacity: 0;
+                        transform: translate(-50%, -50%) scale(0.01);
+                        transition: all 0.1s linear;
+                    }
                 }
             }
-        }
+        
     }
 }
 
 .footer {
     align-items: center;
-    background-color: darken(blue, 25%);
+    background-color: darken(#20B2AA, 20%);
     bottom: 0;
     display: flex;
     flex: 1 0 auto;
-    height: $babyh;
+    height: 30px;
     left: 0;
-    padding: 0 $frame-radius / 2;
+    padding: 0 20px / 2;
     position: absolute;
     right: 0;
-    z-index: $zindex-footer;
+    z-index: 10;
 }
 
 .punkte {
-    color: $white;
-    font-family: 'Orbitron', sans-serif;
+    color: white;
+    font-family: 'Sedgwick Ave Display', sans-serif;
     font-size: 1rem;
-    text-shadow: 0 .4vw black;
+    margin-left: 15px;
+
 
     span {
 
@@ -330,23 +326,25 @@ $red: rgb(208, 61, 60);
 
 .gameover {
     align-items: center;
-    animation: gameover 1s linear unquote($game-speed + 's') forwards;
+    animation: gameover 1s linear unquote(40 + 's') forwards;
     animation-play-state: paused;
     justify-content: center;
     transform: rotateY(90deg);
-    z-index: $gameover-zindex;
+    z-index: 40;
 
     h1 {
-        color: $white;
-        font-family: 'Sedgwick Ave Display', cursive;
+        color: white;
+        font-family: 'Sedgwick Ave Display', sans-serif;
+        font-style: italic;
         font-size: 3rem;
         margin-bottom: 25px;
         text-shadow: 0 .4vw black;
     }
 
     .text {
-        color: $white;
-        font-family: 'Righteous', cursive;
+        color: white;
+        font-family: 'Sedgwick Ave Display', sans-serif;
+        font-style: italic;
         font-weight: normal;
         font-size: 1.5rem;
         margin-bottom: 20px;
@@ -358,8 +356,17 @@ $red: rgb(208, 61, 60);
     }
 
     .punkte {
-        color: blue;
+        color: #BDB76B;
         margin-bottom: 20px;
+        text-shadow: none;
+    }
+
+    a { 
+        color: #BDB76B;
+    }
+
+    a:hover { 
+        color: #556B2F;
     }
 }
 }

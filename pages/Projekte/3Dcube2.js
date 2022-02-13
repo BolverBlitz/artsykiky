@@ -1,4 +1,4 @@
-import  styles  from "../styles/3Dcube.module.scss"
+import  styles  from "../../styles/Projekte/3Dcube2.module.scss"
 import  Head from 'next/head'
 
 function DreiDcube () {

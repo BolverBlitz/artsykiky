@@ -1,4 +1,4 @@
-import  styles  from "../styles/squidgameRedlightGreenlight.module.scss"
+import  styles  from "../../styles/Projekte/squidgameRedlightGreenlight.module.scss"
 import  Head from 'next/head'
 
 function squidgameRedlightGreenlight () {

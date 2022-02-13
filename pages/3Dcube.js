@@ -1,6 +1,7 @@
 import  styles  from "../styles/3Dcube.module.scss"
 import  Head from 'next/head'
 
+
 function DreiDcube () {
     return <div className={styles.wrapper}> 
       <Head>
