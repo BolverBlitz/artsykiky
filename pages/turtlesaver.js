@@ -2,14 +2,14 @@ import styles from "../styles/turtlesaver.module.scss"
 import Head from 'next/head'
 
 function babysaver() {
-    var babies = []
-    for (var bby = 1; bby < 101; bby = bby + 1) {
+    const babies = []
+    for (let bby = 1; bby < 101; bby++) {
         babies.push(<input type="radio" className={styles.check + ' ' + styles["baby" + bby]} id={"baby" + bby} />)
         babies.push(<label htmlFor={"baby" + bby} className={styles.baby + ' ' + styles["baby" + bby]}></label>)
     }
 
 
-    var lennart = (<div className={styles.wrapper}>
+    const lennart = (<div className={styles.wrapper}>
         <Head>
             <title>Save the turtles</title>
         </Head>
