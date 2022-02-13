@@ -13,10 +13,10 @@ const pool = new pg.Pool({
  * Promise to return all users
  * @returns {Object}
  */
- let GetAllGuests = function() {
-  return new Promise(function(resolve, reject) {
+let GetAllGuests = function () {
+  return new Promise(function (resolve, reject) {
     pool.query(`SELECT username FROM scoreuser`, (err, result) => {
-      if (err) {reject(err)}
+      if (err) { reject(err) }
       resolve(result.rows);
     });
   });
@@ -25,11 +25,11 @@ const pool = new pg.Pool({
 pool.query(`CREATE TABLE IF NOT EXISTS scoreuser (
     username text PRIMARY KEY,
     time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP)`, (err, result) => {
-    if (err) {console.log(err)}
+  if (err) { console.log(err) }
 });
 
 export default function handler(req, res) {
-  GetAllGuests().then(function(AllUser_Response) {
-    res.status(200).json( AllUser_Response )
+  GetAllGuests().then(function (AllUser_Response) {
+    res.status(200).json(AllUser_Response)
   });
 }

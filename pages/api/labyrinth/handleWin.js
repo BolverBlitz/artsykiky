@@ -19,12 +19,12 @@ const CheckUsername = Joi.object({
  * @param {string} username
  * @returns {Promise}
  */
- let WriteNewUser = function(username) {
-  return new Promise(function(resolve, reject) {
-    pool.query('INSERT INTO scoreuser (username) VALUES ($1)',[
+let WriteNewUser = function (username) {
+  return new Promise(function (resolve, reject) {
+    pool.query('INSERT INTO scoreuser (username) VALUES ($1)', [
       username
     ], (err, result) => {
-      if (err) {reject(err)}
+      if (err) { reject(err) }
       resolve(result);
     });
   });
@@ -33,18 +33,18 @@ const CheckUsername = Joi.object({
 pool.query(`CREATE TABLE IF NOT EXISTS scoreuser (
     username text PRIMARY KEY,
     time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP)`, (err, result) => {
-    if (err) {console.log(err)}
+  if (err) { console.log(err) }
 });
 
 export default async function handler(req, res) {
   const value = await CheckUsername.validateAsync(req.query);
-  WriteNewUser(value.Username).then(function(NewUser_Response) {
+  WriteNewUser(value.Username).then(function (NewUser_Response) {
     res.status(200).json({ state: 'Success' })
-  }).catch(function(error){
-    if(error.constraint === 'scoreuser_pkey'){
+  }).catch(function (error) {
+    if (error.constraint === 'scoreuser_pkey') {
       res.status(400).json({ state: 'Duplicate' })
-    }else{
+    } else {
       res.status(500).json({ Message: 'Database Error' });
     }
-});
+  });
 }

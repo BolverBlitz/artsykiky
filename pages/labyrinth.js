@@ -1,5 +1,5 @@
-import  styles  from "../styles/labyrinth.module.scss"
-import  Head from 'next/head'
+import styles from "../styles/labyrinth.module.scss"
+import Head from 'next/head'
 
 function Labyrinth() {
     return <div className={styles.wrapper}>
@@ -20,19 +20,19 @@ function Labyrinth() {
             <li></li>
             <li></li>
             <li></li>
-            <input id="second" type="checkbox" value="1"/>
+            <input id="second" type="checkbox" value="1" />
             <li className={styles.level2}></li>
             <li className={styles.level2}></li>
             <li className={styles.level2}></li>
             <li className={styles.level2}></li>
             <li className={styles.level2}></li>
-            <input id="third" type="checkbox" value="2"/>
+            <input id="third" type="checkbox" value="2" />
             <li className={styles.level3}></li>
             <li className={styles.level3}></li>
             <li className={styles.level3}></li>
             <li className={styles.level3}></li>
             <li className={styles.level3}></li>
-            <input id="fourth" type="checkbox" value="3"/>
+            <input id="fourth" type="checkbox" value="3" />
             <li className={styles.level4}></li>
             <li className={styles.level4}></li>
             <li className={styles.level4}></li>
@@ -52,55 +52,55 @@ function Labyrinth() {
     </div>
 }
 
-const handleWin = async (e) =>  {
+const handleWin = async (e) => {
     const getUrl = window.location;
     const baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
     const Username = document.getElementById('username').value
 
-    if(Username.length >= 1){
+    if (Username.length >= 1) {
         const result = await fetch(`${baseUrl}/api/labyrinth/handleWin?Username=${Username}`);
-        if(result.status === 200){
+        if (result.status === 200) {
             console.log(`Added Username ${Username}`)
             fetch(`${baseUrl}/api/labyrinth/getUsers`)
-            .then((res) => { 
-                return res.json() 
-            })
-            .then((jsonData) => {
-                let UserScoreList = []
-                jsonData.map( User => {
-                    UserScoreList.push(User.username)
+                .then((res) => {
+                    return res.json()
                 })
-                document.getElementById('Winners').innerHTML = UserScoreList.join('<br>')
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-        }else if(result.status === 400){
+                .then((jsonData) => {
+                    let UserScoreList = []
+                    jsonData.map(User => {
+                        UserScoreList.push(User.username)
+                    })
+                    document.getElementById('Winners').innerHTML = UserScoreList.join('<br>')
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        } else if (result.status === 400) {
             alert("Username already exists")
         }
-    }else{
+    } else {
         alert("No username was given")
     }
 }
 
-const handleScore = (e) =>  {
+const handleScore = (e) => {
     const getUrl = window.location;
     const baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
     fetch(`${baseUrl}/api/labyrinth/getUsers`)
-    .then((res) => { 
-        return res.json() 
-      })
-      .then((jsonData) => {
-          let UserScoreList = []
-        jsonData.map( User => {
-            UserScoreList.push(User.username)
+        .then((res) => {
+            return res.json()
         })
-        document.getElementById('Winners').innerHTML = UserScoreList.join('<br>')
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+        .then((jsonData) => {
+            let UserScoreList = []
+            jsonData.map(User => {
+                UserScoreList.push(User.username)
+            })
+            document.getElementById('Winners').innerHTML = UserScoreList.join('<br>')
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 }
 
 export default Labyrinth

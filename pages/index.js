@@ -36,3 +36,5 @@ export default function Home() {
         {/*<p><Link href="/CSSBoxModel" passhref><a className={styles.unterseiten}>CSS Box Model</a></Link></p>*/}
       </div>
     </body>
+  </div>
+} 
